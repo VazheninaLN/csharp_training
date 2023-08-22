@@ -8,16 +8,14 @@ namespace addressbook_web_test
 {
     class AccoutData
     {
-        private string Username;
-        private string Password;
-
+        private string Username = "";
+        private string Password = "";
+        
         public AccoutData(string Username, string Password)
         {
             this.Username = Username;
             this.Password = Password;
         }
-    
-    
 
         public string Username
         {
@@ -41,7 +39,7 @@ namespace addressbook_web_test
                 Password =value;
             }
         }
-
+    
 
     }
 }
