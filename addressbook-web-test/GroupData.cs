@@ -10,7 +10,7 @@ namespace addressbook_web_test
 {
     class GroupData
     {
-        private string name = "";
+        private string name;
         private string header =  "";
         private string footer = "";
 
@@ -24,7 +24,7 @@ namespace addressbook_web_test
         {
           this.name = name;
             this.header = header;
-            this.footer = footer;
+            this.footer= footer;
         }
         public string name
         {

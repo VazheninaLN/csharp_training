@@ -6,6 +6,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+//  на проверку
 
 namespace addressbook_web_test
 {
@@ -21,7 +22,7 @@ namespace addressbook_web_test
         public void SetupTest()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook/";
+            baseURL = "http:/localhost/addressbook/";
             verificationErrors = new StringBuilder();
         }
 
@@ -94,7 +95,7 @@ namespace addressbook_web_test
         private void Login(AccoutData account)
         {
             driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.UserName);
+            driver.FindElement(By.Name("user")).SendKeys(account.Username);
             driver.FindElement(By.Name("pass")).Click();
             driver.FindElement(By.Name("pass")).Clear();
             driver.FindElement(By.Name("pass")).SendKeys( account.Password);
