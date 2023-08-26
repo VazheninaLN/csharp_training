@@ -48,8 +48,8 @@ namespace addressbook_web_test
             GoToGroupPage();
             UnitGroupCreation();
             GroupData group = new GroupData("Group5");
-            group.header = ("Header5");
-            group.footer = ("Footer5");
+            group.Header = ("Header5");
+            group.Footer = ("Footer5");
 
             FillGroup(group);
             SubmitGroup();
@@ -73,13 +73,13 @@ namespace addressbook_web_test
             driver.FindElement(By.Name("group_name")).Clear();
             driver.FindElement(By.Name("group_name")).SendKeys("new group1");
             driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.name);
+            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
             driver.FindElement(By.Name("group_header")).Click();
             driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.header);
+            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
             driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.footer);
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
         }
 
         private void UnitGroupCreation()

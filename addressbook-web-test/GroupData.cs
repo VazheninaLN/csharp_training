@@ -11,8 +11,8 @@ namespace addressbook_web_test
     class GroupData
     {
         private string name;
-        private string header =  "";
-        private string footer = "";
+        private string header ="";
+        private string footer ="";
 
 
         public GroupData(string name)
@@ -23,10 +23,10 @@ namespace addressbook_web_test
         public GroupData (string name,string header, string footer)
         {
           this.name = name;
-            this.header = header;
-            this.footer= footer;
+          this.header = header;
+          this.footer= footer;
         }
-        public string name
+        public string Name
         {
             get
             {
@@ -35,7 +35,7 @@ namespace addressbook_web_test
 
             set { name=value; }
         }
-        public string header
+        public string Header
         {
             get
             {
@@ -44,7 +44,7 @@ namespace addressbook_web_test
 
             set { header=value; }
         }
-        public string footer
+        public string Footer
         {
             get
             {

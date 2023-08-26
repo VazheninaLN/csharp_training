@@ -8,35 +8,35 @@ namespace addressbook_web_test
 {
     class AccoutData
     {
-        private string Username ;
-        private string Password ;
+        private string username ;
+        private string password ;
         
-        public AccoutData (string Username, string Password)
+        public AccoutData (string username, string password)
         {
-            this.Username = Username;
-           this.Password = Password;
+            this.username = username;
+           this.password = password;
         }
 
         public string Username
         {
             get
             {
-                return Username;
+                return username;
             }
             set
             {
-                Username=value;
+                username=value;
             }
         }
         public string Password
         {
             get
             {
-                return Password;
+                return password;
             }
             set
             {
-                Password =value;
+                password =value;
             }
         }
     
