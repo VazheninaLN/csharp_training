@@ -44,7 +44,7 @@ namespace addressbook_web_test
         public void GroupCreationTests()
         {
             OpenPage();
-            Login(new AccoutData("admin","secret"));
+            Login(new AccoutData("admin", "secret"));
             GoToGroupPage();
             UnitGroupCreation();
             GroupData group = new GroupData("Group5");
@@ -54,6 +54,11 @@ namespace addressbook_web_test
             FillGroup(group);
             SubmitGroup();
             ReturnToGroupPage();
+            Logout();
+        }
+
+        private void Logout()
+        {
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 

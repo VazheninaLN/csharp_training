@@ -47,14 +47,18 @@ namespace addressbook_web_test
             Login();
             GoToNamepage();
             NameData contact = new NameData("Иван");
-           contact.MiddleName = ("Иванович");
+            contact.MiddleName = ("Иванович");
             contact.LastName = ("Иванов");
             FillName(contact);
             GoToHomePage();
+            Logout();
+        }
+
+        private void Logout()
+        {
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        
 
         private void GoToHomePage()
         {
