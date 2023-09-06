@@ -19,5 +19,17 @@ namespace addressbook_web_test.appmanager
             driver = manager.Driver;
         }
 
+        private bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
     }
 }

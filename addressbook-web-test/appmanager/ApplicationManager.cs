@@ -3,6 +3,7 @@ using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace addressbook_web_test.appmanager
         protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
         protected GroupHelper groupHelper;
+        protected ContactHelper contactHelper;
 
         public ApplicationManager()
         {
@@ -25,6 +27,8 @@ namespace addressbook_web_test.appmanager
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
+            contactHelper= new ContactHelper(this);
+
         }
         public IWebDriver Driver
         {
@@ -59,7 +63,11 @@ namespace addressbook_web_test.appmanager
         {
             get { return groupHelper; }
         }
+        public ContactHelper Contact
+        {
+            get { return contactHelper; }
+        }
 
-        
+
     }
 }

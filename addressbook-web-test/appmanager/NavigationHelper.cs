@@ -31,5 +31,9 @@ namespace addressbook_web_test.appmanager
         {
             driver.FindElement(By.LinkText("groups")).Click();
         }
+        public void GoToContactPage()
+        {
+                driver.FindElement(By.LinkText("add new")).Click();
+        }
     }
 }
