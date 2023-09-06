@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace addressbook_web_test
+namespace addressbook_web_test.model
 {
-    internal class NameData
+    public class NameData
     {
         private string firstname;
         private string middlename = "";
@@ -21,8 +21,8 @@ namespace addressbook_web_test
         public NameData(string firstname, string middlename, string lastname)
         {
             this.firstname = firstname;
-            this.middlename= middlename;
-            this.lastname= lastname;
+            this.middlename = middlename;
+            this.lastname = lastname;
         }
         public string FirstName
         {
@@ -31,7 +31,7 @@ namespace addressbook_web_test
                 return firstname;
             }
 
-            set { firstname=value; }
+            set { firstname = value; }
         }
         public string MiddleName
         {
@@ -40,7 +40,7 @@ namespace addressbook_web_test
                 return middlename;
             }
 
-            set { middlename=value; }
+            set { middlename = value; }
         }
         public string LastName
         {
@@ -49,7 +49,7 @@ namespace addressbook_web_test
                 return lastname;
             }
 
-            set { lastname=value; }
+            set { lastname = value; }
         }
     }
 

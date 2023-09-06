@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_web_test
+namespace addressbook_web_test.model
 {
-    class AccoutData
+    public class AccoutData
     {
-        private string username ;
-        private string password ;
-        
-        public AccoutData (string username, string password)
+        private string username;
+        private string password;
+
+        public AccoutData(string username, string password)
         {
             this.username = username;
-           this.password = password;
+            this.password = password;
         }
 
         public string Username
@@ -25,7 +25,7 @@ namespace addressbook_web_test
             }
             set
             {
-                username=value;
+                username = value;
             }
         }
         public string Password
@@ -36,10 +36,10 @@ namespace addressbook_web_test
             }
             set
             {
-                password =value;
+                password = value;
             }
         }
-    
+
 
     }
 }

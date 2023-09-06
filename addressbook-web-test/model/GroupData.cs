@@ -6,25 +6,25 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_web_test
+namespace addressbook_web_test.model
 {
-    class GroupData
+    public class GroupData
     {
         private string name;
-        private string header ="";
-        private string footer ="";
+        private string header = "";
+        private string footer = "";
 
 
         public GroupData(string name)
         {
             this.name = name;
-            
+
         }
-        public GroupData (string name,string header, string footer)
+        public GroupData(string name, string header, string footer)
         {
-          this.name = name;
-          this.header = header;
-          this.footer= footer;
+            this.name = name;
+            this.header = header;
+            this.footer = footer;
         }
         public string Name
         {
@@ -33,7 +33,7 @@ namespace addressbook_web_test
                 return name;
             }
 
-            set { name=value; }
+            set { name = value; }
         }
         public string Header
         {
@@ -42,7 +42,7 @@ namespace addressbook_web_test
                 return header;
             }
 
-            set { header=value; }
+            set { header = value; }
         }
         public string Footer
         {
@@ -51,7 +51,7 @@ namespace addressbook_web_test
                 return footer;
             }
 
-            set { footer=value; }
+            set { footer = value; }
         }
     }
 }
