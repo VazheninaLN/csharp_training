@@ -14,7 +14,7 @@ namespace addressbook_web_test.appmanager
     [TestFixture]
     public class ContactHelper : HelperBase
     {
-        private IWebDriver driver;
+        //private IWebDriver driver;
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
             //this.driver=driver;

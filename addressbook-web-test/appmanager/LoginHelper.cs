@@ -12,7 +12,7 @@ namespace addressbook_web_test.appmanager
 {
     public class LoginHelper : HelperBase
     {
-        private IWebDriver driver;
+        //private IWebDriver driver;
         public LoginHelper(ApplicationManager manager) : base(manager)
         {
 
@@ -29,10 +29,7 @@ namespace addressbook_web_test.appmanager
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
 
-        public void Logout()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
+        
     }
 
 

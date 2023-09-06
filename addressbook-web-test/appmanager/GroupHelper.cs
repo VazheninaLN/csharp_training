@@ -13,7 +13,7 @@ namespace addressbook_web_test.appmanager
     public class GroupHelper : HelperBase
     {
 
-        private IWebDriver driver;
+        //private IWebDriver driver;
         public GroupHelper(ApplicationManager manager) : base(manager)
         {
             //this.driver=driver;
