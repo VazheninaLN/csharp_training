@@ -11,6 +11,7 @@ namespace addressbook_web_test.tests
     [TestFixture]
     public class GroupModificationTests :TestBase
     {
+        [Test]
         public void GroupModificationTest()
         {
             GroupData newData = new GroupData("Group6");
