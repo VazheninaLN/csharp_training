@@ -32,7 +32,7 @@ namespace addressbook_web_test.appmanager
         public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-                 SelectGroup(p);
+            SelectGroup(p);
             InitGroupModification();
             FillGroup(newData);
             SubmitGroupModification();

@@ -13,6 +13,7 @@ namespace addressbook_web_test.appmanager
     {
         protected ApplicationManager manager;
         protected IWebDriver driver;
+        
         public HelperBase(ApplicationManager manager)
         {
             this.manager=manager;
@@ -30,6 +31,8 @@ namespace addressbook_web_test.appmanager
             {
                 return false;
             }
+
         }
     }
+
 }

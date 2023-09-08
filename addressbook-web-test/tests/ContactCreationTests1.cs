@@ -1,10 +1,8 @@
 ﻿using addressbook_web_test.model;
-
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using addressbook_web_test.model;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -17,7 +15,7 @@ namespace addressbook_web_test.tests
 
     {
         [Test]
-        public void GroupCreationTest()
+        public void ContactCreationTest()
         {
 
             app.Navigator.GoToContactPage();

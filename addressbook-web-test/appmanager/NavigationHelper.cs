@@ -24,6 +24,11 @@ namespace addressbook_web_test.appmanager
         {
             driver.Navigate().GoToUrl(baseURL + "/addressbook/group.php");
         }
+        public void OpenPageHome()
+        
+        {
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/");
+        }
 
 
 
@@ -33,7 +38,13 @@ namespace addressbook_web_test.appmanager
         }
         public void GoToContactPage()
         {
-                driver.FindElement(By.LinkText("add new")).Click();
+                driver.FindElement(By.LinkText("home")).Click();
+        }
+
+        public void GoToPageAddContact()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            
         }
     }
 }
