@@ -12,17 +12,23 @@ using OpenQA.Selenium.Support.UI;
 namespace addressbook_web_test.tests
 {
     [TestFixture]
-    public class ContactRemoveTests : TestBase
+    public class ContactRemoveTests : AuthTestBase
 
     {
         [Test]
         public void ContactRemoveTest()
         {
-            app.Navigator.OpenPageHome();
-            app.Navigator.GoToContactPage();
-            app.Contact
-            .SelectContact(1)
-            .RemoveContact();
+            // использовать данные для контакта , если его нет 
+            NameData contact = new NameData("Петр");
+            contact.MiddleName = "ПЕтрович";
+            contact.LastName = "Петров";
+
+            app.Navigator.OpenPage();
+            //app.Navigator.GoToContactPage();
+            app.Contact.Remove(1, contact);
+            //app.Contact
+            //.SelectContact(1)
+            //.RemoveContact();
                     //delete?
             Assert.IsTrue(Regex.IsMatch(app.Contact.CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
             app.Contact.GoToHomePage();

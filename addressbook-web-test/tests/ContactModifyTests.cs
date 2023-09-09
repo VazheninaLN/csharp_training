@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_test.tests
 {
-    public class ContactModifyTests : TestBase
+    public class ContactModifyTests : AuthTestBase
 
     {
         [Test]
         public void ContactModifyTest()
         {
-            app.Navigator.OpenPageHome();
-            app.Navigator.GoToContactPage();
+            app.Navigator.OpenPage();
+            //app.Navigator.GoToContactPage();
 
             NameData contact = new NameData("Петр");
             contact.MiddleName = "ПЕтрович";

@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 namespace addressbook_web_test.tests
 {
     [TestFixture]
-    public class GroupCreationTests : TestBase
+    public class GroupCreationTests : AuthTestBase
     {
 
 
@@ -28,7 +28,7 @@ namespace addressbook_web_test.tests
             app.Groups.Create(group);
          
         }
-
+        [Test]
         public void EmptyGroupCreationTest()
         {
 

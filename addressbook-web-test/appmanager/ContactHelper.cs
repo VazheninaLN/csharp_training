@@ -32,21 +32,56 @@ namespace addressbook_web_test.appmanager
             return this;
       
         }
-        
 
+        public ContactHelper Remove(int p, NameData contact)
+        {
+            manager.Navigator.GoToContactPage();
+            if (driver.Url=="http://localhost/addressbook/"
+               && IsElementPresent(By.Name("selected[]")))
+            {
+                SelectContact(p);
+               RemoveContact();
+            }
+            else
+            {
+                FillContact(contact);
+                SubmitContact();
+            }
+            
+            //GoToHomePage();
+            return this;
+
+        }
+
+        public ContactHelper Modify(int p, NameData newData)
+        {
+            manager.Navigator.GoToContactPage();
+            if (driver.Url=="http://localhost/addressbook/"
+               && IsElementPresent(By.Name("selected[]")))
+            {
+                SelectContact(p);
+                // нажать  Edit
+                InitContactModification();
+                FillContact(newData);
+                //нажать update
+                SubmitContactModification();
+            }
+            else
+            {
+                FillContact(newData);
+                SubmitContact();
+            }
+            GoToHomePage();
+            return this;
+
+        }
 
         public ContactHelper FillContact(NameData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
-            driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.MiddleName);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
+            Type(By.Name("firstname"), contact.FirstName);
+            Type(By.Name("middlename"), contact.MiddleName);
+            Type(By.Name("lastname"), contact.LastName);
+            
             //driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
             return this;
         }
@@ -76,15 +111,7 @@ namespace addressbook_web_test.appmanager
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }
-        public ContactHelper Remove(int p)
-        {
-            manager.Navigator.GoToContactPage();
-            SelectContact(p);
-            RemoveContact();
-            GoToHomePage();
-            return this;
-
-        }
+        
 
         public ContactHelper InitContactModification()
         {
@@ -97,23 +124,6 @@ namespace addressbook_web_test.appmanager
             driver.FindElement(By.Name("update")).Click();
             return this;
         }
-
-
-
-        public ContactHelper Modify(int p, NameData newData)
-        {
-            manager.Navigator.GoToContactPage();
-            SelectContact(p);
-            // нажать  Edit
-            InitContactModification();
-            FillContact(newData);
-            //нажать update
-            SubmitContactModification();
-            GoToHomePage();
-            return this;
-
-        }
-
 
 
 
@@ -152,6 +162,5 @@ namespace addressbook_web_test.appmanager
             }
         }
     
-
 }
 }

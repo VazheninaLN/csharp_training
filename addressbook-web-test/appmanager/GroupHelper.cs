@@ -7,16 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace addressbook_web_test.appmanager
 {
     public class GroupHelper : HelperBase
     {
 
-        //private IWebDriver driver;
+        
         public GroupHelper(ApplicationManager manager) : base(manager)
         {
-            //this.driver=driver;
+            
         }
 
         public GroupHelper Create (GroupData group)
@@ -32,7 +33,18 @@ namespace addressbook_web_test.appmanager
         public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(p);
+            if (driver.Url=="http://localhost/addressbook/group.php"
+                && IsElementPresent(By.Name("selected[]")))
+            {
+                
+                SelectGroup(p);
+            }
+            else
+            {
+                UnitGroupCreation();
+                FillGroup(newData);
+                SubmitGroup(); 
+            }
             InitGroupModification();
             FillGroup(newData);
             SubmitGroupModification();
@@ -40,22 +52,32 @@ namespace addressbook_web_test.appmanager
             return this;
         }
 
-        
-
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
             return this;
         }
 
-        public GroupHelper Remove(int p)
+        public GroupHelper Remove(int p, GroupData newData)
+
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(p);
-            RemoveGroup();
+            if (driver.Url=="http://localhost/addressbook/group.php"
+                && IsElementPresent(By.Name("selected[]")))
+            {
+                SelectGroup(p);
+                RemoveGroup();
+            }
+            else
+            {
+                UnitGroupCreation();
+                FillGroup(newData);
+                SubmitGroup();
+            }
+           
             ReturnToGroupPage();
             return this;
-            //throw new NotImplementedException();
+           
         }
 
         public GroupHelper SelectGroup(int index)
@@ -63,9 +85,6 @@ namespace addressbook_web_test.appmanager
             driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
             return this;
         }
-
-
-
 
 
         public GroupHelper ReturnToGroupPage()
@@ -82,17 +101,12 @@ namespace addressbook_web_test.appmanager
 
         public GroupHelper FillGroup(GroupData group)
         {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys("new group1");
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+           
+            Type(By.Name("group_name"), group.Name);
+            Type(By.Name("group_header"), group.Header);
+            Type(By.Name("group_footer"), group.Footer);
+            
+            
             return this;
         }
 
