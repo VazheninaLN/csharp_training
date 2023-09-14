@@ -24,7 +24,7 @@ namespace addressbook_web_test.model
             MiddleName = middlename;
             LastName = lastname;
         }
-        public NameData(string firstname, string lastname)
+        public NameData(string lastname, string firstname)
         {
             FirstName = firstname;
             //MiddleName = middlename;

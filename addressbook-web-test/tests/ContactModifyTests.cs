@@ -38,9 +38,10 @@ namespace addressbook_web_test.tests
             List<NameData> newContact = app.Contact.GetContactList();
             oldContact[0].FirstName= contact.FirstName;
             oldContact[0].LastName= contact.LastName;
-            newContact.Sort();
-            oldContact.Sort();
             
+            oldContact.Sort();
+            newContact.Sort(); 
+
             Assert.AreEqual(oldContact, newContact);
 
         }

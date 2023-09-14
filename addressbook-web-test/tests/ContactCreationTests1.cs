@@ -37,7 +37,7 @@ namespace addressbook_web_test.tests
             oldContact.Add(contact);
             oldContact.Sort();
             newContact.Sort();
-            //Assert.AreEqual(oldContact, newContact);
+            Assert.AreEqual(oldContact, newContact);
 
         }
 
