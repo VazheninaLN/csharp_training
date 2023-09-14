@@ -7,6 +7,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Security.Cryptography;
 
 namespace addressbook_web_test.tests
 {
@@ -18,12 +19,25 @@ namespace addressbook_web_test.tests
         public void ContactCreationTest()
         {
 
+
             app.Navigator.GoToContactPage();
             NameData contact = new NameData("Иван");
             contact.MiddleName = "Иванович";
             contact.LastName = "Иванов";
 
-            app.Contact.Create(contact);
+            List<NameData> oldContact = app.Contact.GetContactList();
+
+            
+            app.Contact.Create(contact); 
+            
+
+            List<NameData> newContact= app.Contact.GetContactList();
+            
+            
+            oldContact.Add(contact);
+            oldContact.Sort();
+            newContact.Sort();
+            //Assert.AreEqual(oldContact, newContact);
 
         }
 

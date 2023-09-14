@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,20 +19,30 @@ namespace addressbook_web_test.tests
         [Test]
         public void ContactRemoveTest()
         {
-            // использовать данные для контакта , если его нет 
-            NameData contact = new NameData("Петр");
-            contact.MiddleName = "ПЕтрович";
-            contact.LastName = "Петров";
+            // использовать данные для контакта, если его нет 
+            NameData contactRemove = new NameData("Петр", "Пeтрович", "Петров");
 
             app.Navigator.OpenPage();
-            //app.Navigator.GoToContactPage();
-            app.Contact.Remove(1, contact);
-            //app.Contact
-            //.SelectContact(1)
-            //.RemoveContact();
-                    //delete?
-            Assert.IsTrue(Regex.IsMatch(app.Contact.CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
-            app.Contact.GoToHomePage();
+            List<NameData> oldContact = app.Contact.GetContactList();
+
+            if (app.Contact.IsContactPresent())
+            {
+                app.Contact.Remove(0);
+                List<NameData> newContact = app.Contact.GetContactList();
+                oldContact.RemoveAt(0);
+                oldContact.Sort();
+                newContact.Sort();
+
+                Assert.AreEqual(oldContact, newContact);
+            }
+            else
+            {
+                // create new contact for remove
+                app.Contact.Create(contactRemove);
+                //delete
+                app.Contact.Remove(0);
+                app.Contact.GoToHomePage();
+            }
             
         }
 

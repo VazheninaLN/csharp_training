@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using addressbook_web_test.model;
@@ -33,21 +34,15 @@ namespace addressbook_web_test.appmanager
       
         }
 
-        public ContactHelper Remove(int p, NameData contact)
+        public ContactHelper Remove(int p)
         {
             manager.Navigator.GoToContactPage();
-            if (driver.Url=="http://localhost/addressbook/"
-               && IsElementPresent(By.Name("selected[]")))
-            {
-                SelectContact(p);
-               RemoveContact();
-            }
-            else
-            {
-                FillContact(contact);
-                SubmitContact();
-            }
             
+            SelectContact(p);
+            RemoveContact();
+            driver.SwitchTo().Alert().Accept();
+
+
             //GoToHomePage();
             return this;
 
@@ -56,21 +51,14 @@ namespace addressbook_web_test.appmanager
         public ContactHelper Modify(int p, NameData newData)
         {
             manager.Navigator.GoToContactPage();
-            if (driver.Url=="http://localhost/addressbook/"
-               && IsElementPresent(By.Name("selected[]")))
-            {
-                SelectContact(p);
+            // выбрать контакт
+              SelectContact(p);
                 // нажать  Edit
-                InitContactModification();
-                FillContact(newData);
-                //нажать update
-                SubmitContactModification();
-            }
-            else
-            {
-                FillContact(newData);
-                SubmitContact();
-            }
+             InitContactModification();
+             FillContact(newData);
+            //нажать update
+            SubmitContactModification();
+            
             GoToHomePage();
             return this;
 
@@ -81,14 +69,41 @@ namespace addressbook_web_test.appmanager
             Type(By.Name("firstname"), contact.FirstName);
             Type(By.Name("middlename"), contact.MiddleName);
             Type(By.Name("lastname"), contact.LastName);
-            
-            //driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            Type(By.Name("firstname"), contact.NickName);
+            Type(By.Name("middlename"), contact.Photo);
+            Type(By.Name("lastname"), contact.Title);
+            Type(By.Name("firstname"), contact.Company);
+            Type(By.Name("middlename"), contact.Address);
+            Type(By.Name("lastname"), contact.Thome);
+            Type(By.Name("firstname"), contact.Tmobile);
+            Type(By.Name("middlename"), contact.Twork);
+            Type(By.Name("lastname"), contact.Tfax);
+            Type(By.Name("firstname"), contact.Email1);
+            Type(By.Name("middlename"), contact.Email2);
+            Type(By.Name("lastname"), contact.Email3);
+            Type(By.Name("firstname"), contact.HomePage);
+            Type(By.Name("middlename"), contact.Bday);
+            Type(By.Name("lastname"), contact.Bmonth);
+            Type(By.Name("firstname"), contact.Byears);
+            Type(By.Name("middlename"), contact.Aday);
+            Type(By.Name("lastname"), contact.Amonth);
+            Type(By.Name("firstname"), contact.Ayears);
+            Type(By.Name("middlename"), contact.Group);
+            Type(By.Name("lastname"), contact.SecAddress);
+            Type(By.Name("middlename"), contact.SecHome);
+            Type(By.Name("lastname"), contact.SecNotes);
             return this;
+        }
+
+        public bool IsContactPresent()
+        {
+            return IsElementPresent(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.Id("1")).Click();
-            //driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            //driver.FindElement(By.Id("" +(index+1)+"")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
+            //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index) + "]")).Click();
             return this;
         }
 
@@ -161,6 +176,28 @@ namespace addressbook_web_test.appmanager
                 acceptNextAlert = true;
             }
         }
-    
-}
+
+        public List<NameData> GetContactList()
+        {
+            List<NameData> contact = new List<NameData>();
+            manager.Navigator.GoToContactPage();
+            // собираем имя и фамилию из таблицы. Не уверена в этом
+            
+            
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));
+            int count = 0;
+            foreach (IWebElement element in elements)
+            {
+                count++;
+
+                contact.Add(new NameData(element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + (count) + "]//td[2]")).Text,
+                element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + (count) + "]//td[3]")).Text));
+                //contact.Add(new NameData(element.Text));
+               
+            }
+            return contact;
+
+        }
+
+    }
 }

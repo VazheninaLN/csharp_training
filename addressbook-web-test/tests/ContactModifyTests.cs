@@ -14,6 +14,7 @@ namespace addressbook_web_test.tests
         [Test]
         public void ContactModifyTest()
         {
+          
             app.Navigator.OpenPage();
             //app.Navigator.GoToContactPage();
 
@@ -21,10 +22,26 @@ namespace addressbook_web_test.tests
             contact.MiddleName = "ПЕтрович";
             contact.LastName = "Петров";
 
+            List<NameData> oldContact = app.Contact.GetContactList();
+            if (app.Contact.IsContactPresent())
+            {
+                app.Contact.Modify(0, contact);
+            }
+            else 
+            {
+                NameData contactModify = new NameData("Сидоров", "Иван");
+                app.Contact.Create(contactModify);
+                app.Navigator.OpenPage();
+                app.Contact.Modify(0, contact);
+            }
 
-              app.Contact.Modify(1, contact);
-
-
+            List<NameData> newContact = app.Contact.GetContactList();
+            oldContact[0].FirstName= contact.FirstName;
+            oldContact[0].LastName= contact.LastName;
+            newContact.Sort();
+            oldContact.Sort();
+            
+            Assert.AreEqual(oldContact, newContact);
 
         }
 

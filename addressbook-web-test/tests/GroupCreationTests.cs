@@ -7,6 +7,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 
 namespace addressbook_web_test.tests
@@ -25,7 +26,22 @@ namespace addressbook_web_test.tests
             group.Header = "Header5";
             group.Footer = "Footer5";
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
+
+            
+            Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount()); 
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            // если первая группа
+            if (oldGroups.Count>0)
+            {
+                Assert.AreEqual(oldGroups, newGroups);
+            }
          
         }
         [Test]
@@ -36,8 +52,20 @@ namespace addressbook_web_test.tests
             group.Header = "";
             group.Footer = "";
             //app.Navigator.GoToGroupsPage();
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
-               
+            Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount());
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            if (oldGroups.Count>0)
+            {
+                Assert.AreEqual(oldGroups, newGroups);
+                    }; 
+
         }
 
 

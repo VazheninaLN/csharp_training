@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace addressbook_web_test.model
 {
-    public class AccoutData
+    public class AccoutData 
     {
         private string username;
         private string password;
@@ -16,6 +17,8 @@ namespace addressbook_web_test.model
             this.username = username;
             this.password = password;
         }
+
+
 
         public string Username
         {
