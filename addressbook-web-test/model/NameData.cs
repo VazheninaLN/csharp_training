@@ -112,7 +112,8 @@ namespace addressbook_web_test.model
             }
             else
             {
-                return -1;
+                //return -1;
+                return LastName.CompareTo(other.LastName);
             }
         }
         public string FirstName { get; set; }
