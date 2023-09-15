@@ -108,18 +108,6 @@ namespace addressbook_web_test.model
             }
             if (LastName.CompareTo(other.LastName) == 0)
             {
-                if (FirstName.CompareTo(other.FirstName) == 1)
-                {
-                    return 1;
-                }
-                if (FirstName.CompareTo(other.FirstName) == -1)
-                {
-                    return -1;
-                }
-                if (FirstName.CompareTo(other.FirstName) == 0)
-                {
-                    return 0;
-                }
                 return FirstName.CompareTo(other.FirstName);
             }
             else
@@ -172,7 +160,7 @@ namespace addressbook_web_test.model
         public string SecHome { get; set; }
         public string SecNotes { get; set; }
 
-
+        public string Id { get; set; }
 
     }
 

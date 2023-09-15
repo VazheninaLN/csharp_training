@@ -27,13 +27,21 @@ namespace addressbook_web_test.tests
 
             if (app.Contact.IsContactPresent())
             {
+                NameData toBeRemoved = oldContact[0];
                 app.Contact.Remove(0);
-                List<NameData> newContact = app.Contact.GetContactList();
-                oldContact.RemoveAt(0);
-                oldContact.Sort();
-                newContact.Sort();
+               
+                    Assert.AreEqual(oldContact.Count -1, app.Contact.GetContactCount());
+                    List<NameData> newContact = app.Contact.GetContactList();
+                    oldContact.RemoveAt(0);
+                    oldContact.Sort();
+                    newContact.Sort();
 
-                Assert.AreEqual(oldContact, newContact);
+                    Assert.AreEqual(oldContact, newContact);
+                    foreach (NameData contact in newContact)
+                    {
+                        Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+                    }
+                
             }
             else
             {

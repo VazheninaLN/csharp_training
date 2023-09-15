@@ -54,7 +54,7 @@ namespace addressbook_web_test.appmanager
             // выбрать контакт
               SelectContact(p);
                 // нажать  Edit
-             InitContactModification();
+             InitContactModification(p);
              FillContact(newData);
             //нажать update
             SubmitContactModification();
@@ -110,6 +110,7 @@ namespace addressbook_web_test.appmanager
         public ContactHelper SubmitContact()
         {
             driver.FindElement(By.Name("submit")).Click();
+            contactCache =null;
             return this;
         }
 
@@ -124,19 +125,22 @@ namespace addressbook_web_test.appmanager
         {
             //driver.FindElement(By.Name("delete")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache =null;
             return this;
         }
         
 
-        public ContactHelper InitContactModification()
+        public ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            //driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            driver.FindElement(By.XPath("(//form[@name='MainForm']//img[@title='Edit'])[" + (index+1) + "]")).Click();
             return this;
         }
 
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache =null;
             return this;
         }
 
@@ -176,28 +180,39 @@ namespace addressbook_web_test.appmanager
                 acceptNextAlert = true;
             }
         }
-
+        private List<NameData> contactCache = null;
         public List<NameData> GetContactList()
         {
-            List<NameData> contact = new List<NameData>();
-            manager.Navigator.GoToContactPage();
-            // собираем имя и фамилию из таблицы. Не уверена в этом
-            
-            
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));
-            int count = 0;
-            foreach (IWebElement element in elements)
-            {
-                count++;
+            if (contactCache == null)
+            { contactCache =  new List<NameData>();
+                manager.Navigator.GoToContactPage();
+                // собираем имя и фамилию из таблицы.
 
-                contact.Add(new NameData(element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + (count) + "]//td[2]")).Text,
-                element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + (count) + "]//td[3]")).Text));
-                //contact.Add(new NameData(element.Text));
-               
+
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));
+                int count = 0;
+                foreach (IWebElement element in elements)
+                {
+                    count++;
+                    
+                 
+                    //contactCache.Add(new NameData(element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + (count) + "]//td[2]")).Text,
+                    //element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + (count) + "]//td[3]")).Text));
+                    contactCache.Add(
+                    new NameData(element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + count + "]//td[2]")).Text,
+                    element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + count + "]//td[3]")).Text){ 
+                         Id=element.FindElement(By.TagName("input")).GetAttribute("value")});
+                }
+
             }
-            return contact;
+
+            return new List<NameData>(contactCache);
 
         }
 
+        public int GetContactCount()
+        {
+             return driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']")).Count;
+        }
     }
 }

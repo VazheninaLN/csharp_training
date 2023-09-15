@@ -1,10 +1,15 @@
-﻿using addressbook_web_test.model;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using addressbook_web_test.model;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_test.tests
 {
@@ -16,33 +21,49 @@ namespace addressbook_web_test.tests
         {
           
             app.Navigator.OpenPage();
-            //app.Navigator.GoToContactPage();
+            
 
-            NameData contact = new NameData("Петр");
-            contact.MiddleName = "ПЕтрович";
-            contact.LastName = "Петров";
+            NameData contactM= new NameData("Петр");
+            contactM.MiddleName = "ПЕтрович";
+            contactM.LastName = "Петров";
+           
+
+
 
             List<NameData> oldContact = app.Contact.GetContactList();
+            NameData oldData = oldContact[0];
+            
             if (app.Contact.IsContactPresent())
             {
-                app.Contact.Modify(0, contact);
+                app.Contact.Modify(0, contactM);
+               
             }
             else 
             {
-                NameData contactModify = new NameData("Сидоров", "Иван");
-                app.Contact.Create(contactModify);
+                
+                app.Contact.Create(contactM);
                 app.Navigator.OpenPage();
-                app.Contact.Modify(0, contact);
+                app.Contact.Modify(0, contactM);
             }
-
+            Assert.AreEqual(oldContact.Count, app.Contact.GetContactCount());
             List<NameData> newContact = app.Contact.GetContactList();
-            oldContact[0].FirstName= contact.FirstName;
-            oldContact[0].LastName= contact.LastName;
+            oldContact[0].FirstName= contactM.FirstName;
+            oldContact[0].LastName= contactM.LastName;
             
             oldContact.Sort();
             newContact.Sort(); 
 
             Assert.AreEqual(oldContact, newContact);
+
+            foreach (NameData contact in newContact)
+            {
+                if (contactM.Id == oldData.Id)
+                { 
+                  Assert.AreEqual(contact.FirstName, contactM.FirstName);
+                  Assert.AreEqual(contact.LastName, contactM.LastName);
+                }
+             
+            }
 
         }
 

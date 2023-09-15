@@ -63,8 +63,8 @@ namespace addressbook_web_test.tests
             newGroups.Sort();
             if (oldGroups.Count>0)
             {
-                Assert.AreEqual(oldGroups, newGroups);
-                    }; 
+             Assert.AreEqual(oldGroups, newGroups);
+            }; 
 
         }
 
