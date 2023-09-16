@@ -16,15 +16,28 @@ namespace addressbook_web_test.tests
     public class GroupCreationTests : AuthTestBase
     {
 
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i< 5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    Header = GenerateRandomString(100),
+                    Footer = GenerateRandomString(100)
+                });
+            }
+            return groups;
+        }
 
-        [Test]
-        public void GroupCreationTest()
+        
+
+        [Test,TestCaseSource("RandomGroupDataProvider")]
+        public void GroupCreationTest(GroupData group)
         {
            
             app.Navigator.GoToGroupsPage();
-            GroupData group = new GroupData("Group5");
-            group.Header = "Header5";
-            group.Footer = "Footer5";
+           
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 

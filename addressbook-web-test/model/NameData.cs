@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace addressbook_web_test.model
 {
     public class NameData : IEquatable<NameData>, IComparable<NameData>
     {
         //private string firstname;
-        //private string middlename = "";
-        //private string lastname = "";
+        public string allPhone;
+        public string allEmail;
 
         public NameData(string firstname)
         {
             FirstName = firstname;
-
         }
         public NameData(string firstname, string middlename, string lastname)
         {
@@ -30,6 +30,7 @@ namespace addressbook_web_test.model
             //MiddleName = middlename;
             LastName = lastname;
         }
+        
         public NameData(string firstname,
                 string middlename,
                 string lastname,
@@ -162,6 +163,53 @@ namespace addressbook_web_test.model
         public string SecNotes { get; set; }
 
         public string Id { get; set; }
+        public string AllPhone 
+        {
+            get
+            {
+                if (allPhone != null)
+                {
+                    return allPhone;
+                }
+                else
+                {
+                    return (CleanUp(Thome) + CleanUp(Tmobile) + CleanUp(Twork)).Trim();
+                }
+            }
+            set 
+            { 
+                allPhone =value;
+            }
+        }
+
+        public string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[ -()-]", "") + "\r\n";
+                
+        }
+
+        public string AllEmail
+        {
+            get
+            {
+                if (allEmail != null)
+                {
+                    return allEmail;
+                }
+                else
+                {
+                    return (CleanUp(Email1) + CleanUp(Email2) +CleanUp(Email3)).Trim();
+                }
+            }
+            set
+            {
+                allEmail =value;
+            }
+        }
 
     }
 
