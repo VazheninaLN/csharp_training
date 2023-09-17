@@ -27,24 +27,13 @@ namespace addressbook_web_test.tests
             contactM.MiddleName = "ПЕтрович";
             contactM.LastName = "Петров";
            
-
-
-
             List<NameData> oldContact = app.Contact.GetContactList();
             NameData oldData = oldContact[0];
-            
-            if (app.Contact.IsContactPresent())
-            {
+
+            if (app.Contact.IsContactPresent() ==false) { app.Contact.Create(contactM); }
+           
                 app.Contact.Modify(0, contactM);
-               
-            }
-            else 
-            {
-                
-                app.Contact.Create(contactM);
-                app.Navigator.OpenPage();
-                app.Contact.Modify(0, contactM);
-            }
+              
             Assert.AreEqual(oldContact.Count, app.Contact.GetContactCount());
             List<NameData> newContact = app.Contact.GetContactList();
             oldContact[0].FirstName= contactM.FirstName;

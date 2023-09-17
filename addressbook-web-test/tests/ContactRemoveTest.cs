@@ -25,33 +25,25 @@ namespace addressbook_web_test.tests
             app.Navigator.OpenPage();
             List<NameData> oldContact = app.Contact.GetContactList();
 
-            if (app.Contact.IsContactPresent())
-            {
+            if (app.Contact.IsContactPresent()==false) { app.Contact.Create(contactRemove); }
+            
                 NameData toBeRemoved = oldContact[0];
                 app.Contact.Remove(0);
-               
-                    Assert.AreEqual(oldContact.Count -1, app.Contact.GetContactCount());
-                    List<NameData> newContact = app.Contact.GetContactList();
-                    oldContact.RemoveAt(0);
-                    oldContact.Sort();
-                    newContact.Sort();
 
-                    Assert.AreEqual(oldContact, newContact);
-                    foreach (NameData contact in newContact)
-                    {
-                        Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
-                    }
-                
-            }
-            else
+            if (oldContact.Count>1)
             {
-                // create new contact for remove
-                app.Contact.Create(contactRemove);
-                //delete
-                app.Contact.Remove(0);
-                app.Contact.GoToHomePage();
-            }
-            
+                Assert.AreEqual(oldContact.Count -1, app.Contact.GetContactCount());
+                List<NameData> newContact = app.Contact.GetContactList();
+                oldContact.RemoveAt(0);
+                oldContact.Sort();
+                newContact.Sort();
+
+                Assert.AreEqual(oldContact, newContact);
+                foreach (NameData contact in newContact)
+                {
+                    Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+                }
+            } 
         }
 
 

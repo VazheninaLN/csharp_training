@@ -22,15 +22,10 @@ namespace addressbook_web_test.tests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             GroupData oldData = oldGroups[0];
 
-            if (app.Groups.IsGroupPresent())
-            { app.Groups.Modify(0, newData); }
-            else
-            {
-                GroupData newGroupM = new GroupData ("Group7", "Header7", "Footer7");
-                app.Groups.Create(newData);
-                app.Groups.Modify(0, newGroupM);
+            if (app.Groups.IsGroupPresent() != true) { app.Groups.Create(newData); }
 
-            }
+             app.Groups.Modify(0, newData); 
+           
 
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using System.Dynamic;
 
 namespace addressbook_web_test.model
 {
@@ -13,6 +14,7 @@ namespace addressbook_web_test.model
         //private string firstname;
         public string allPhone;
         public string allEmail;
+        public string allDetals;
 
         public NameData(string firstname)
         {
@@ -30,7 +32,11 @@ namespace addressbook_web_test.model
             //MiddleName = middlename;
             LastName = lastname;
         }
-        
+        public NameData()
+        {
+            
+        }
+
         public NameData(string firstname,
                 string middlename,
                 string lastname,
@@ -208,6 +214,28 @@ namespace addressbook_web_test.model
             set
             {
                 allEmail =value;
+            }
+        }
+
+
+        public string AllDetals
+        {
+            get
+            {
+                if (allDetals != null)
+                {
+                    //return allDetals;
+                    return allDetals.Replace(" ", "").Replace("\r\n", "").Replace("H:", "").Replace("M:", "").Replace("W:", "").Replace("F:", "").Replace("Homepage:", "").Replace("P:", "");
+                }
+                else
+                {
+                    return FirstName.Trim() + MiddleName.Trim() + LastName + NickName + Title + Company
+                       + Address + Thome + Tmobile + Twork + Tfax + Email1 + Email2 + Email3 + HomePage + SecAddress + SecHome + SecNotes;
+                }
+            }
+            set
+            {
+                allDetals =value;
             }
         }
 

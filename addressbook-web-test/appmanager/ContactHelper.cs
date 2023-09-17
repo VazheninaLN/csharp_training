@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -218,6 +219,11 @@ namespace addressbook_web_test.appmanager
              return driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']")).Count;
         }
 
+        public void GoToContactDetails(int index)
+        {
+            manager.Navigator.OpenPage(); ;
+            driver.FindElement(By.XPath("(//form[@name='MainForm']//img[@title='Details'])["+index+"]")).Click();
+        }
         public NameData GetContactInformationFromTable(int index)
         {
             manager.Navigator.OpenPage();
@@ -255,6 +261,16 @@ namespace addressbook_web_test.appmanager
             string email1 = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            string fax = driver.FindElement(By.Name("fax")).GetAttribute("value");
+
+            string nickname = driver.FindElement(By.Name("nickname")).GetAttribute("value");
+            string company = driver.FindElement(By.Name("company")).GetAttribute("value");
+            string title = driver.FindElement(By.Name("title")).GetAttribute("value");
+
+            string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
+            string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
+            string notes = driver.FindElement(By.Name("notes")).GetAttribute("value");
+            
 
 
             return new NameData(lastName, firstName)
@@ -268,6 +284,18 @@ namespace addressbook_web_test.appmanager
                 Email3 =email3,
             };
 
+            
+        }
+
+        public NameData GetContactInformationFromDetals(int index)
+
+        {
+            GoToContactDetails(index);
+            string allDetals = driver.FindElement(By.XPath("//div[@id = 'content']")).Text;
+            return new NameData()
+            {
+                AllDetals = allDetals
+            };
             
         }
     }
