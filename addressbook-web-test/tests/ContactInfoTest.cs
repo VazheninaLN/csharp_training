@@ -41,10 +41,8 @@ namespace addressbook_web_test.tests
             NameData fromDetals = app.Contact.GetContactInformationFromDetals(0);
             NameData fromForm = app.Contact.GetContactInformationFromEditForm(0);
 
-
             Assert.AreEqual(fromDetals.AllDetals, fromForm.AllDetals);
            
-
         }
 
     }
