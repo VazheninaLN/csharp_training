@@ -43,8 +43,9 @@ namespace addressbook_web_test.appmanager
             SelectContact(p);
             RemoveContact();
             driver.SwitchTo().Alert().Accept();
+            driver.FindElement(By.CssSelector("div.msgbox"));
 
-            //GoToHomePage();
+            GoToHomePage();
             return this;
 
         }

@@ -32,4 +32,10 @@
     <PackageReference Include="Selenium.WebDriver" Version="4.11.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="groups.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

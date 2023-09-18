@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addressbook-web-test", "add
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{77F1B727-D33F-4016-ADA6-0ECDEBCBACB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addressbook-test-data-generators", "..\addressbook-test-data-generators\addressbook-test-data-generators.csproj", "{F4ED354A-91E9-4A9F-B057-7174B7836E1E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{14697A83-BEFA-4154-B411-9417E4CA8F64} = {14697A83-BEFA-4154-B411-9417E4CA8F64}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +22,10 @@ Global
 		{14697A83-BEFA-4154-B411-9417E4CA8F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14697A83-BEFA-4154-B411-9417E4CA8F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14697A83-BEFA-4154-B411-9417E4CA8F64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4ED354A-91E9-4A9F-B057-7174B7836E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4ED354A-91E9-4A9F-B057-7174B7836E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4ED354A-91E9-4A9F-B057-7174B7836E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4ED354A-91E9-4A9F-B057-7174B7836E1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
