@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using addressbook_web_test.model;
 using OpenQA.Selenium;
@@ -105,7 +106,7 @@ namespace addressbook_web_test.appmanager
         {
             //driver.FindElement(By.Id("" +(index+1)+"")).Click();
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
-            //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index) + "]")).Click();
+            
             return this;
         }
 
@@ -254,10 +255,14 @@ namespace addressbook_web_test.appmanager
             string firstName =driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value");
+
             string nickname = driver.FindElement(By.Name("nickname")).GetAttribute("value");
-            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
-            string company = driver.FindElement(By.Name("company")).GetAttribute("value");
+
             string title = driver.FindElement(By.Name("title")).GetAttribute("value");
+            string company = driver.FindElement(By.Name("company")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+
+           
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
@@ -266,11 +271,12 @@ namespace addressbook_web_test.appmanager
             string email1 = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
-            
             string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
 
             string secaddress = driver.FindElement(By.Name("address2")).GetAttribute("value");
+
             string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+
             string sesnotes = driver.FindElement(By.Name("notes")).GetAttribute("value");
             
 
@@ -306,11 +312,10 @@ namespace addressbook_web_test.appmanager
 
         {
             GoToContactDetails(index);
-            string allDetals = driver.FindElement(By.XPath("//div[@id = 'content']")).Text;
-            return new NameData()
-            {
-                AllDetals = allDetals
-            };
+            string allDetals = Regex.Replace((driver.FindElement(By.XPath("//div[@id = 'content']")).Text),"\r\n" ,"");
+
+            return   new NameData(){AllDetals = allDetals};
+            
             
         }
     }
