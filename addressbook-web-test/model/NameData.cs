@@ -15,14 +15,7 @@ namespace addressbook_web_test.model
         public string allPhone;
         public string allEmail;
         public string allDetals = null;
-        public string allNameInfo;
-        public string allPhoneInfo;
-        public string allEmailInfo;
-        public string allSecInfo;
-        public string allInfo;
-
-
-
+       
 
 
         public NameData(string firstname)
@@ -43,11 +36,7 @@ namespace addressbook_web_test.model
         }
         public NameData()
         {
-            AllNameInfo=allNameInfo;
-            AllInfo =allInfo;
-            AllPhoneInfo =allPhoneInfo;
-            AllEmailInfo = allEmailInfo;
-            AllSecInfo =allSecInfo;
+            
         }
 
         public NameData(string firstname,
@@ -201,16 +190,6 @@ namespace addressbook_web_test.model
             }
         }
 
-        public string CleanUp(string phone)
-        {
-            if (phone == null || phone == "")
-            {
-                return "";
-            }
-            return Regex.Replace(phone, "[ -()-]", "") + "\r\n";
-
-        }
-
         public string AllEmail
         {
             get
@@ -229,147 +208,52 @@ namespace addressbook_web_test.model
                 allEmail =value;
             }
         }
-
-        public string AllEmailInfo
+        public string CleanUp(string phone)
         {
-            get
+            if (phone == null || phone == "")
             {
-                if (allEmailInfo != null)
-                {
-                    return allEmailInfo;
-                }
-                else
-                {
-                    if (Email1 != null && Email1 != "") { allEmailInfo +=Email1 +"\r\n"; }
-                    if (Email2 != null && Email2 != "") { allEmailInfo += Email2 +  "\r\n"; }
-                    if (Email3 != null && Email3 != "") { allEmailInfo += Email3 + "\r\n"; }
-                    if (HomePage != null && HomePage != "") { allEmailInfo +=  "Homepage:\r\n" + HomePage +"\r\n"; }
-                    return allEmailInfo;
-                }
+                return "";
+            }
+            return Regex.Replace(phone, "[ -()-]", "") + "\r\n";
 
-            }
-            set
-            {
-                allEmailInfo =value;
-            }
         }
 
-        public string AllPhoneInfo
-        {
-            get
-            {
-                if (allPhoneInfo != null)
-                {
-                    return allPhoneInfo;
-                }
-                else
-                {
-
-                    if (Thome != null && Thome != "") { allPhoneInfo +="H: " + Thome +"\r\n"; }
-                    if (Tmobile != null && Tmobile != "") { allPhoneInfo += "M: " + Tmobile +"\r\n"; } 
-                    if (Twork != null && Twork != "") { allPhoneInfo +=  "W: " + Twork + "\r\n"; } 
-                    if (Tfax != null && Tfax != "") { allPhoneInfo +=  "F: " + Tfax + "\r\n"; } 
-
-                    return allPhoneInfo;
-                }
-            }
-            set
-            {
-                allPhoneInfo =value;
-            }
-        }
-
-        public string AllSecInfo
-        {
-            get
-            {
-                if (allSecInfo != null)
-                {
-                    return allSecInfo;
-                }
-                else
-                {
-                    if (SecAddress != null && SecAddress != "") { allSecInfo +=SecAddress; }
-                    if (SecHome  != null && SecHome  != "") { allSecInfo += "\r\n\r\n" + "P: " + SecHome; }
-                    if (SecNotes != null && SecNotes != "") { allSecInfo += "\r\n\r\n" + SecNotes; }
-                    return allSecInfo;
-                }
-
-            }
-            set
-            {
-                allSecInfo =value;
-            }
-        }
-        public string AllInfo
-        {
-            get
-            {
-                if (allInfo != null)
-                {
-                    return allInfo;
-                }
-                else
-                {
-                    if (Title != null && Title != "") { allInfo += Title +  "\r\n"; }
-                    if (Company != null && Company != "" ) { allInfo +=  Company +"\r\n"; } 
-                    if (Address != null && Address != "" ) { allInfo +=  Address +"\r\n"; }
-
-                    //if (allInfo != "") allInfo.Trim("\r\n");
-                    return allInfo;
-                }
-
-            }
-            set
-            {
-                allInfo =value;
-            }
-        }
-
-        public string AllNameInfo
-        {
-            get
-            {
-                if (allNameInfo != null)
-                {
-                    return allNameInfo;
-                }
-                else
-                {
-                    
-                    if (FirstName != null && FirstName != "") { allNameInfo += FirstName; }
-                    if (MiddleName != null && MiddleName != "") {allNameInfo += " " + MiddleName; }
-                    if (LastName != null && LastName != "") { allNameInfo +=  " " +LastName; }
-                    if (NickName != null && NickName != "") { allNameInfo += "\r\n" + NickName; }
-                    
-                    return allNameInfo;
-                }
-
-            }
-            set
-            {
-                allNameInfo =value;
-            }
-        }
-
-
-
+       
         public string AllDetals
         {
             get
             {
                 if (allDetals == null)
                 {
-                    if (AllNameInfo!= null && AllNameInfo != "") { allDetals += AllNameInfo; }
-                    if (AllInfo!= null && AllInfo != "") { allDetals += "\r\n" + AllInfo;}
-                    if (AllPhoneInfo!= null && AllPhoneInfo != "") { allDetals += "\r\n" + AllPhoneInfo; }
-                    if (AllEmailInfo!= null && AllEmailInfo != "") { allDetals += "\r\n" + AllEmailInfo; }
-                    if (AllSecInfo!= null && AllSecInfo != "") { allDetals += "\r\n" + AllSecInfo; }
+                    if (FirstName != null && FirstName != "") { allDetals += FirstName; }
+                    if (MiddleName != null && MiddleName != "") { allDetals += " " + MiddleName; }
+                    if (LastName != null && LastName != "") { allDetals +=  " " +LastName; }
+                    if (NickName != null && NickName != "") { allDetals += NickName; }
 
-                        return Regex.Replace (allDetals, "\r\n","");
+                    if (Title != null && Title != "") { allDetals += Title ; }
+                    if (Company != null && Company != "") { allDetals +=  Company ; }
+                    if (Address != null && Address != "") { allDetals +=  Address ; }
+
+                    if (Thome != null && Thome != "") { allDetals +="H: " + Thome;  }
+                    if (Tmobile != null && Tmobile != "") { allDetals += "M: " + Tmobile; }
+                    if (Twork != null && Twork != "") { allDetals +=  "W: " + Twork ; }
+                    if (Tfax != null && Tfax != "") { allDetals +=  "F: " + Tfax ; }
+
+                    if (Email1 != null && Email1 != "") { allDetals +=Email1; }
+                    if (Email2 != null && Email2 != "") { allDetals += Email2 ; }
+                    if (Email3 != null && Email3 != "") { allDetals += Email3 ; }
+                    if (HomePage != null && HomePage != "") { allDetals +=  "Homepage:" + HomePage ; }
+
+                    if (SecAddress != null && SecAddress != "") { allDetals +=SecAddress; }
+                    if (SecHome  != null && SecHome  != "") { allDetals += "P: " + SecHome; }
+                    if (SecNotes != null && SecNotes != "") { allDetals += SecNotes; }
+
+                    return 
+                        Regex.Replace(allDetals, "\r\n", "");
+                        //Regex.Replace (allDetals, @"\r\", "");
                     }
 
-                    return Regex.Replace(allDetals, "\r\n","");
+                return allDetals;
 
             }
                 set
