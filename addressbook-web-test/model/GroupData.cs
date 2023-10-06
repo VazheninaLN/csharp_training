@@ -10,14 +10,19 @@ namespace addressbook_web_test.model
 {
     public class GroupData: IEquatable <GroupData> ,IComparable <GroupData>
     {
-        
-     
+
+        public GroupData()
+        {
+
+
+        }
 
         public GroupData(string name)
         {
             Name = name;
 
         }
+        
 
         public bool Equals(GroupData other)
         {
