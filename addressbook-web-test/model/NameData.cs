@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Dynamic;
+using LinqToDB.Mapping;
 
 namespace addressbook_web_test.model
 {
+    [Table (Name = "addressbook")]
     public class NameData : IEquatable<NameData>, IComparable<NameData>
     {
         //private string firstname;
@@ -125,11 +127,23 @@ namespace addressbook_web_test.model
                 return LastName.CompareTo(other.LastName);
             }
         }
+        public static List<NameData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
+        }
+
+        [Column (Name  = "firstname")]
         public string FirstName { get; set; }
-
+       
         public string MiddleName { get; set; }
-
+        [Column(Name = "lastname")]
         public string LastName { get; set; }
+
+       
+       
         public string NickName { get; set; }
         public string Photo { get; set; }
 
@@ -169,8 +183,10 @@ namespace addressbook_web_test.model
         public string SecAddress { get; set; }
         public string SecHome { get; set; }
         public string SecNotes { get; set; }
-
+        [Column(Name = "id"),PrimaryKey]
         public string Id { get; set; }
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
         public string AllPhone
         {
             get

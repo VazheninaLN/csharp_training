@@ -2,6 +2,8 @@ using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Linq;
+using LinqToDB;
 using addressbook_web_test.model;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -18,7 +20,7 @@ using Microsoft.Office.Interop.Excel;
 namespace addressbook_web_test.tests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
 
         public static IEnumerable<GroupData> RandomGroupDataProvider()
@@ -38,7 +40,7 @@ namespace addressbook_web_test.tests
         public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
-            string[] lines =File.ReadAllLines(@"groups.csv");
+            string[] lines = File.ReadAllLines(@"groups.csv");
             foreach (string l in lines)
             {
                 string[] parts = l.Split(',');
@@ -56,12 +58,12 @@ namespace addressbook_web_test.tests
         public static IEnumerable<GroupData> GroupDataFromXmlFile()
         {
             List<GroupData> groups = new List<GroupData>();
-            return  (List<GroupData>) new XmlSerializer(typeof(List<GroupData>))
+            return (List<GroupData>)new XmlSerializer(typeof(List<GroupData>))
                 .Deserialize(new StreamReader(@"groups.xml"));
 
-           
+
         }
-        
+
         public static IEnumerable<GroupData> GroupDataFromJsonFile()
         {
             return JsonConvert.DeserializeObject<List<GroupData>>(
@@ -72,16 +74,16 @@ namespace addressbook_web_test.tests
 
         public static IEnumerable<GroupData> GroupDataFromExcelFile()
         {
-           List <GroupData> groups = new List<GroupData> ();
+            List<GroupData> groups = new List<GroupData>();
             Excel.Application app = new Excel.Application();
-           Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"groups.xlsx"));
+            Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"groups.xlsx"));
             Excel.Worksheet sheet = wb.ActiveSheet;
             Excel.Range range = sheet.UsedRange;
             for (int i = 1; i<= range.Rows.Count; i++)
-            { 
-            groups.Add(new GroupData()
+            {
+                groups.Add(new GroupData()
                 {
-                    Name = range.Cells[i,1].Value,
+                    Name = range.Cells[i, 1].Value,
                     Header = range.Cells[i, 2].Value,
                     Footer = range.Cells[i, 3].Value,
                 });
@@ -93,19 +95,19 @@ namespace addressbook_web_test.tests
 
         }
 
-        [Test,TestCaseSource("GroupDataFromExcelFile")]
+        [Test, TestCaseSource("GroupDataFromExcelFile")]
         public void GroupCreationTest(GroupData group)
         {
-           
+
             app.Navigator.GoToGroupsPage();
-           
+
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
 
-            
-            Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount()); 
+
+            Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(group);
@@ -116,7 +118,7 @@ namespace addressbook_web_test.tests
             {
                 Assert.AreEqual(oldGroups, newGroups);
             }
-         
+
         }
         [Test]
         public void EmptyGroupCreationTest()
@@ -126,19 +128,29 @@ namespace addressbook_web_test.tests
             group.Header = "";
             group.Footer = "";
             //app.Navigator.GoToGroupsPage();
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             app.Groups.Create(group);
             Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
             if (oldGroups.Count>0)
             {
-             Assert.AreEqual(oldGroups, newGroups);
-            }; 
+                Assert.AreEqual(oldGroups, newGroups);
+            };
+
+        }
+        [Test]
+        public void TestBDConnectivity()
+        {
+            
+            List<GroupData> fromUi = app.Groups.GetGroupList();
+           
+            AddressBookDB db = new AddressBookDB();
+            List<GroupData> fromDb = (from g in db.Groups select g).ToList();
 
         }
 

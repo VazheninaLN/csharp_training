@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 namespace addressbook_web_test.tests
 {
     [TestFixture]
-    public class GroupModificationTests : AuthTestBase
+    public class GroupModificationTests : GroupTestBase
     {
         [Test]
         public void GroupModificationTest()

@@ -220,7 +220,7 @@ namespace addressbook_web_test.appmanager
 
         public void GoToContactDetails(int index)
         {
-            manager.Navigator.OpenPage(); ;
+            manager.Navigator.OpenPage(); 
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[6]
                 .FindElement(By.TagName("a")).Click();
@@ -317,6 +317,37 @@ namespace addressbook_web_test.appmanager
             return   new NameData(){AllDetals = allDetals};
             
             
+        }
+
+        public void AddContactToGroup(NameData contact, GroupData group)
+        {
+            manager.Navigator.GoToContactPage();
+            ClearGroupFilter();
+            SelectContactId(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        private void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        private void SelectContactId(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();
+        }
+
+        private void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
     }
 }
