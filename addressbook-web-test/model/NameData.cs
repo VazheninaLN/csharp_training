@@ -13,6 +13,7 @@ namespace addressbook_web_test.model
     [Table (Name = "addressbook")]
     public class NameData : IEquatable<NameData>, IComparable<NameData>
     {
+       
         //private string firstname;
         public string allPhone;
         public string allEmail;
@@ -137,37 +138,38 @@ namespace addressbook_web_test.model
 
         [Column (Name  = "firstname")]
         public string FirstName { get; set; }
-       
+        [Column(Name = "middlename")]
         public string MiddleName { get; set; }
         [Column(Name = "lastname")]
         public string LastName { get; set; }
 
-       
-       
+        [Column(Name = "nickname")]
         public string NickName { get; set; }
+     
         public string Photo { get; set; }
-
+        [Column(Name = "title")]
         public string Title { get; set; }
+        [Column(Name = "company")]
 
         public string Company { get; set; }
+        
         public string Address { get; set; }
-
+       
         public string Thome { get; set; }
-
+       
         public string Tmobile { get; set; }
-
+       
 
         public string Twork { get; set; }
-
+       
         public string Tfax { get; set; }
-
+        
         public string Email1 { get; set; }
         public string Email2 { get; set; }
-
+        
         public string Email3 { get; set; }
-
+       
         public string HomePage { get; set; }
-
 
         public string Bday { get; set; }
         public string Bmonth { get; set; }
@@ -183,7 +185,7 @@ namespace addressbook_web_test.model
         public string SecAddress { get; set; }
         public string SecHome { get; set; }
         public string SecNotes { get; set; }
-        [Column(Name = "id"),PrimaryKey]
+        [Column(Name = "id"), PrimaryKey, Identity]
         public string Id { get; set; }
         [Column(Name = "deprecated")]
         public string Deprecated { get; set; }

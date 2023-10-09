@@ -50,6 +50,19 @@ namespace addressbook_web_test.appmanager
             return this;
 
         }
+        public ContactHelper Remove( NameData contact)
+        {
+
+            manager.Navigator.GoToContactPage();
+
+            SelectContact(contact.Id);
+            RemoveContact();
+            driver.SwitchTo().Alert().Accept();
+            driver.FindElement(By.CssSelector("div.msgbox"));
+
+            GoToHomePage();
+            return this;
+        }
 
         public ContactHelper Modify(int p, NameData newData)
         {
@@ -62,6 +75,23 @@ namespace addressbook_web_test.appmanager
             //нажать update
             SubmitContactModification();
             
+            GoToHomePage();
+            return this;
+
+        }
+
+
+        public ContactHelper Modify(NameData contact, NameData newData)
+        {
+            manager.Navigator.GoToContactPage();
+            // выбрать контакт
+            SelectContact(contact.Id);
+            // нажать  Edit
+            InitContactModification(contact.Id);
+            FillContact(newData);
+            //нажать update
+            SubmitContactModification();
+
             GoToHomePage();
             return this;
 
@@ -110,6 +140,14 @@ namespace addressbook_web_test.appmanager
             return this;
         }
 
+        public ContactHelper SelectContact(string id)
+        {
+
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
+
+            return this;
+        }
+
         public ContactHelper SubmitContact()
         {
             driver.FindElement(By.Name("submit")).Click();
@@ -137,6 +175,12 @@ namespace addressbook_web_test.appmanager
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[7]
                 .FindElement(By.TagName("a")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModification(string id)
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]' and @value='"+id+ "']/ancestor::tr//img[@title='Edit']")).Click();
             return this;
         }
 

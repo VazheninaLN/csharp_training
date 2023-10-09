@@ -14,6 +14,7 @@ namespace addressbook_web_test.tests
     {
         
         public static bool PERFORM_LONG_UI_CHECKS = true;
+        public static bool PERFORM_LONG_UI_CHECKS_CONTACT = true;
         protected ApplicationManager app;
 
 

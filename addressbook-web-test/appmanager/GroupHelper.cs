@@ -44,6 +44,20 @@ namespace addressbook_web_test.appmanager
             return this;
         }
 
+
+        public GroupHelper Modify(GroupData groups ,GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+
+
+            SelectGroup(groups.Id);
+            InitGroupModification();
+            FillGroup(newData);
+            SubmitGroupModification();
+            ReturnToGroupPage();
+            return this;
+        }
+
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();

@@ -13,7 +13,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_test.tests
 {
-    public class ContactModifyTests : AuthTestBase
+    public class ContactModifyTests : ContactTestBase
 
     {
         [Test]
@@ -27,15 +27,16 @@ namespace addressbook_web_test.tests
             contactM.MiddleName = "ПЕтрович";
             contactM.LastName = "Петров";
            
-            List<NameData> oldContact = app.Contact.GetContactList();
-            NameData oldData = oldContact[0];
+            List<NameData> oldContact = NameData.GetAll();
+            //NameData oldData = oldContact[0];
+            NameData tobeModify = oldContact[0];
 
             if (app.Contact.IsContactPresent() ==false) { app.Contact.Create(contactM); }
            
-                app.Contact.Modify(0, contactM);
+                app.Contact.Modify(tobeModify, contactM);
               
             Assert.AreEqual(oldContact.Count, app.Contact.GetContactCount());
-            List<NameData> newContact = app.Contact.GetContactList();
+            List<NameData> newContact = NameData.GetAll();
             oldContact[0].FirstName= contactM.FirstName;
             oldContact[0].LastName= contactM.LastName;
             
@@ -46,7 +47,7 @@ namespace addressbook_web_test.tests
 
             foreach (NameData contact in newContact)
             {
-                if (contactM.Id == oldData.Id)
+                if (contactM.Id == tobeModify.Id)
                 { 
                   Assert.AreEqual(contact.FirstName, contactM.FirstName);
                   Assert.AreEqual(contact.LastName, contactM.LastName);

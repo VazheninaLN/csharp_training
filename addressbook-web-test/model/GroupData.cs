@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LinqToDB.Mapping;
 using MySqlX.XDevAPI.Relational;
+using addressbook_web_test.tests;
 
 namespace addressbook_web_test.model
 

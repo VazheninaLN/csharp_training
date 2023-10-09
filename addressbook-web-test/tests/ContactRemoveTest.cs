@@ -13,7 +13,7 @@ using OpenQA.Selenium.Support.UI;
 namespace addressbook_web_test.tests
 {
     [TestFixture]
-    public class ContactRemoveTests : AuthTestBase
+    public class ContactRemoveTests : ContactTestBase
 
     {
         [Test]
@@ -23,17 +23,17 @@ namespace addressbook_web_test.tests
             NameData contactRemove = new NameData("Петр", "Пeтрович", "Петров");
 
             app.Navigator.OpenPage();
-            List<NameData> oldContact = app.Contact.GetContactList();
+            List<NameData> oldContact = NameData.GetAll();
 
             if (app.Contact.IsContactPresent()==false) { app.Contact.Create(contactRemove); }
             
-                NameData toBeRemoved = oldContact[0];
-                app.Contact.Remove(0);
+            NameData toBeRemoved = oldContact[0];
+            app.Contact.Remove(toBeRemoved);
 
             if (oldContact.Count>1)
             {
                 Assert.AreEqual(oldContact.Count -1, app.Contact.GetContactCount());
-                List<NameData> newContact = app.Contact.GetContactList();
+                List<NameData> newContact = NameData.GetAll();
                 oldContact.RemoveAt(0);
                 oldContact.Sort();
                 newContact.Sort();

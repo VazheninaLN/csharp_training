@@ -19,17 +19,18 @@ namespace addressbook_web_test.tests
             newData.Header = "Header6";
             newData.Footer = "Footer6";
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            GroupData oldData = oldGroups[0];
+            List<GroupData> oldGroups = GroupData.GetAll();
+            GroupData toBeModificate = oldGroups[0];
 
             if (app.Groups.IsGroupPresent() != true) { app.Groups.Create(newData); }
-
-             app.Groups.Modify(0, newData); 
+            
+            
+            app.Groups.Modify(toBeModificate, newData);
            
 
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
                 oldGroups[0].Name = newData.Name;
                 oldGroups.Sort();
                 newGroups.Sort();
@@ -37,7 +38,7 @@ namespace addressbook_web_test.tests
 
             foreach (GroupData group in newGroups)
             {
-                if (group.Id ==oldData.Id)
+                if (group.Id ==toBeModificate.Id)
                 {
                     Assert.AreEqual(newData.Name, group.Name);
                 }

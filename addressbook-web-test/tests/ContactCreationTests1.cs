@@ -17,8 +17,8 @@ using System.Data;
 namespace addressbook_web_test.tests
 {
     [TestFixture]
-    public class ContactCreationTests : AuthTestBase
-       
+    public class ContactCreationTests : ContactTestBase
+
 
     {
         public static IEnumerable<NameData> RandomContactDataProvider()
@@ -53,14 +53,14 @@ namespace addressbook_web_test.tests
             app.Navigator.GoToContactPage();
             
 
-            List<NameData> oldContact = app.Contact.GetContactList();
+            List<NameData> oldContact = NameData.GetAll();
 
             
             app.Contact.Create(contact);
             
             Assert.AreEqual(oldContact.Count+1, app.Contact.GetContactCount());
 
-            List<NameData> newContact= app.Contact.GetContactList();
+            List<NameData> newContact = NameData.GetAll();
             
             
             oldContact.Add(contact);

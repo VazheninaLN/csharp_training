@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using LinqToDB;
 using OpenQA.Selenium.DevTools.V113.Database;
 
+
 namespace addressbook_web_test.model
 {
-    public class AddressBookDB :LinqToDB.Data.DataConnection
+    public class AddressBookDB : LinqToDB.Data.DataConnection
     {
-        public AddressBookDB() : base("AddressBookDB") { }
+        public AddressBookDB() : base("AddressBook") { }
 
         public ITable<GroupData> Groups { get { return this.GetTable<GroupData>(); } }
         public ITable<NameData> Contacts { get { return this.GetTable<NameData>(); } }
