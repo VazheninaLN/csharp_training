@@ -393,5 +393,24 @@ namespace addressbook_web_test.appmanager
         {
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
+
+        public void RemoveContatFromGroup(NameData contact, GroupData group)
+        {
+            manager.Navigator.GoToContactPage();
+            GroupFilterByName(group.Name);
+            SelectContactId(contact.Id);
+            RemoveContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+            manager.Navigator.GoToContactPage();
+
+        }
+        public void GroupFilterByName(String groupName)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(groupName);
+        }
+        public void RemoveContactFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
     }
 }
