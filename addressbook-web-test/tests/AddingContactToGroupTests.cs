@@ -12,19 +12,81 @@ namespace addressbook_web_test.tests
     {
         [Test]
         public void TestAddingContactToGroup()
-        { 
-            GroupData group  =  GroupData.GetAll()[0];
-            List<NameData> oldList = group.GetContacts();
-            NameData contact = NameData.GetAll().Except(oldList).First();
+        {
+            List<GroupData> groupList = GroupData.GetAll();
 
-            app.Contact.AddContactToGroup(contact, group);
+            List<NameData> contactList = NameData.GetAll();
+            //  если нет группы
+            if (groupList.Count == 0)
+            {
+                app.Groups.Create(new GroupData("group1"));
+                groupList = GroupData.GetAll();
+            }
+            // если нет контакта
+            if (contactList.Count == 0)
+            {
+                app.Contact.Create(new NameData("name1", "name2"));
+                contactList = NameData.GetAll();
+            }
 
-            List<NameData> newList = group.GetContacts();
-            oldList.Add(contact);   
-            newList.Sort();
-            oldList.Sort();
+           
+            int count = 0;
+            //собираем контакты в группе
+            foreach (GroupData g in groupList)
+            {
+                List<NameData> contactsInGroup = g.GetContacts();
+                contactList.Sort();
+                contactsInGroup.Sort();
+                if (contactList.Count()!=contactsInGroup.Count())
+                {
+                    NameData contact = contactList.Except(contactsInGroup).First();
+                    List<NameData> oldList = g.GetContacts();
+                    app.Contact.AddContactToGroup(contact, g);
+                    List<NameData> newList = g.GetContacts();
+                    oldList.Add(contact);
+                    oldList.Sort();
+                    newList.Sort();
+                    Assert.AreEqual(oldList, newList);
+                    break;
+                }
+                count++;
 
-            Assert.AreEqual(oldList, newList);
+                // сравниваем 
+                if (count == groupList.Count())
+                {
+                    app.Contact.Create(new NameData("name1", "name2"));
+                    contactList = NameData.GetAll();
+                    NameData contact = contactList.Except(contactsInGroup).First();
+                    List<NameData> oldList = g.GetContacts();
+                    app.Contact.AddContactToGroup(contact, g);
+                    List<NameData> newList = g.GetContacts();
+                    oldList.Add(contact);
+                    oldList.Sort();
+                    newList.Sort();
+                    Assert.AreEqual(oldList, newList);
+                }
+
+            }
+
+
+
+
+
+
+
+
+
+
+            //NameData contact = NameData.GetAll().Except(oldList).First();
+
+            //app.Contact.AddContactToGroup(contact, group);
+
+            //List<NameData> newList = group.GetContacts();
+            //oldList.Add(contact);   
+           // newList.Sort();
+           // oldList.Sort();
+
+            //Assert.AreEqual(oldList, newList);
 
         }
     }
