@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 
-namespace addressbook_tests_autoit 
+namespace addressbook_tests_autoit
 {
-    public class GroupData :  IComparable<GroupData>, IEquatable<GroupData>
-    {
-        public string Name { get; set; }    
-    }
-    public int CompareTo(GroupData other)
-    {
-        return this.Name.CompareTo(other.Name);
-    }
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
 
-    public bool Equals(GroupData other)
     {
-        return this.Name.Equals(other.Name);
+        public string Name { get; set; }
+
+        public int CompareTo(GroupData other)
+        {
+            return this.Name.CompareTo(other.Name);
+        }
+
+        public bool Equals(GroupData other)
+        {
+            return this.Name.Equals(other.Name);
+        }
     }
 }
