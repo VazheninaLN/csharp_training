@@ -27,7 +27,7 @@ namespace addressbook_tests_autoit
         public void Add(GroupData newGroup)
         {
             OpenGroupsDialogue();
-            aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d510");
+            aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d53");
             aux.Send(newGroup.Name);
             aux.Send("{ENTER}");
             CloseGroupsDialogue();
@@ -35,12 +35,12 @@ namespace addressbook_tests_autoit
 
         public void OpenGroupsDialogue()
         {
-            aux.ControlClick(WINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d510");
+            aux.ControlClick(WINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d512");
             aux.WinWait(GROUPWINTITLE);
         }
         public void CloseGroupsDialogue()
         {
-            aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d510");
+            aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d54");
         }
 
 

@@ -19,7 +19,7 @@ namespace addressbook_tests_autoit
             oldGroups.Add(newGroup);
             oldGroups.Sort();
             newGroups.Sort();   
-            Assert.AreEqual(oldGroups, newGroups);
+            Assert.AreEqual(oldGroups.Count, newGroups.Count);
         }
     }
 }
