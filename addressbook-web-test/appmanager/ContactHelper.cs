@@ -299,7 +299,6 @@ namespace addressbook_web_test.appmanager
             string firstName =driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value");
-
             string nickname = driver.FindElement(By.Name("nickname")).GetAttribute("value");
 
             string title = driver.FindElement(By.Name("title")).GetAttribute("value");
@@ -356,8 +355,8 @@ namespace addressbook_web_test.appmanager
 
         {
             GoToContactDetails(index);
-            string allDetals = Regex.Replace((driver.FindElement(By.XPath("//div[@id = 'content']")).Text),"\r\n" ,"");
-
+            //string allDetals = Regex.Replace((driver.FindElement(By.XPath("//div[@id = 'content']")).Text),"\r\n" ,"");
+            string allDetals = (driver.FindElement(By.XPath("//div[@id = 'content']")).Text);
             return   new NameData(){AllDetals = allDetals};
             
             

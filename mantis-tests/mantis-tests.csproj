@@ -22,4 +22,8 @@
     <PackageReference Include="System.Net.FtpClient" Version="1.0.5824.34026" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="appmanager\Новая папка\" />
+  </ItemGroup>
+
 </Project>

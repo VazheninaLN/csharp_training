@@ -17,9 +17,14 @@ namespace mantis_tests
         //protected StringBuilder verificationErrors;
         protected string baseURL;
 
-        public RegistrationHelper Registration { get; set; }
-        public FtpHelper Ftp { get; set; }
-        public MailHelper Mail { get; set; }
+       
+        private bool acceptNextAlert = true;
+        protected LoginHelper loginHelper;
+        protected ProjectHelper projectHelper;
+        protected NavigationHelper navigationHelper;
+       
+
+       
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
@@ -29,8 +34,11 @@ namespace mantis_tests
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             baseURL = "http://localhost";
             Registration =  new RegistrationHelper(this);
-            Ftp = new FtpHelper(this);    
-            Mail = new MailHelper(this);
+            Ftp = new FtpHelper(this);
+            //Mail = new MailHelper(this);
+            loginHelper = new LoginHelper(this);
+            projectHelper = new ProjectHelper(this);
+            navigationHelper = new NavigationHelper(this, baseURL);
 
         }
         ~ApplicationManager()
@@ -50,7 +58,7 @@ namespace mantis_tests
             if (!app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-1.3.20/login_page.php";
+                newInstance.driver.Url = "http://localhost/mantisbt-2.25.8/login_page.php";
                 app.Value=newInstance;
                
             }
@@ -62,9 +70,24 @@ namespace mantis_tests
             {
                 return driver;
             }
-        }        
+        }
 
-       
+        public RegistrationHelper Registration { get; set; }
+        public FtpHelper Ftp { get; set; }
+        //public MailHelper Mail { get; set; }
+        public ProjectHelper Project
+        {
+            get{return projectHelper;}
+        }
+        public NavigationHelper Navigator
+        {
+            get { return navigationHelper; }
+        }
+        public LoginHelper Auth
+        {
+            get { return loginHelper;  }
+           
+        }
 
 
     }
