@@ -375,7 +375,7 @@ namespace addressbook_web_test.model
             {
                 if (allDetals == null)
                 {
-                    if (AllNameInfo!= null && AllNameInfo != "") { allDetals += AllNameInfo; }
+                    if (AllNameInfo!= null && AllNameInfo != "") { allDetals += AllNameInfo;}
                     if (AllInfo!= null && AllInfo != "") { allDetals += "\r\n" + AllInfo; }
                     if (AllPhoneInfo!= null && AllPhoneInfo != "") { allDetals += "\r\n" + AllPhoneInfo; }
                     if (AllEmailInfo!= null && AllEmailInfo != "") { allDetals += "\r\n" + AllEmailInfo; }

@@ -25,7 +25,7 @@ namespace addressbook_web_test.tests
             // если нет контакта
             if (contactList.Count == 0)
             {
-                app.Contact.Create(new NameData("name1", "name2"));
+                app.Contact.Create(new NameData("name11", "name22"));
                 contactList = NameData.GetAll();
             }
 
@@ -37,9 +37,11 @@ namespace addressbook_web_test.tests
                 List<NameData> contactsInGroup = g.GetContacts();
                 contactList.Sort();
                 contactsInGroup.Sort();
+                // не все контакты в группе
                 if (contactList.Count()!=contactsInGroup.Count())
                 {
                     NameData contact = contactList.Except(contactsInGroup).First();
+
                     List<NameData> oldList = g.GetContacts();
                     app.Contact.AddContactToGroup(contact, g);
                     List<NameData> newList = g.GetContacts();
@@ -51,7 +53,7 @@ namespace addressbook_web_test.tests
                 }
                 count++;
 
-                // сравниваем 
+                
                 if (count == groupList.Count())
                 {
                     app.Contact.Create(new NameData("name1", "name2"));
@@ -69,24 +71,6 @@ namespace addressbook_web_test.tests
             }
 
 
-
-
-
-
-
-
-
-
-            //NameData contact = NameData.GetAll().Except(oldList).First();
-
-            //app.Contact.AddContactToGroup(contact, group);
-
-            //List<NameData> newList = group.GetContacts();
-            //oldList.Add(contact);   
-           // newList.Sort();
-           // oldList.Sort();
-
-            //Assert.AreEqual(oldList, newList);
 
         }
     }
