@@ -26,18 +26,7 @@ namespace mantis_tests
                 return Name.CompareTo(other.Name);
             }
 
-            public bool Equals(ProjectData other)
-            {
-                if (Object.ReferenceEquals(other, null))
-                {
-                    return false;
-                }
-                if (Object.ReferenceEquals(other, this))
-                {
-                    return true;
-                }
-                return Name == other.Name;
-            }
+           
             public override int GetHashCode()
             {
                 return Name.GetHashCode();

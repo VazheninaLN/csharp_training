@@ -25,7 +25,7 @@ namespace addressbook_web_test.tests
             // если нет контакта
             if (contactList.Count == 0)
             {
-                app.Contact.Create(new NameData("name11", "name22"));
+                app.Contact.Create(new NameData(("name"+TestBase.GenerateRandomString(50)),("name"+TestBase.GenerateRandomString(50))));
                 contactList = NameData.GetAll();
             }
 
@@ -56,7 +56,7 @@ namespace addressbook_web_test.tests
                 
                 if (count == groupList.Count())
                 {
-                    app.Contact.Create(new NameData("name1", "name2"));
+                    app.Contact.Create(new NameData(("name"+TestBase.GenerateRandomString(50)), ("name"+TestBase.GenerateRandomString(50))));
                     contactList = NameData.GetAll();
                     NameData contact = contactList.Except(contactsInGroup).First();
                     List<NameData> oldList = g.GetContacts();

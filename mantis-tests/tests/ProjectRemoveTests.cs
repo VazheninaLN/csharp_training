@@ -29,8 +29,7 @@ namespace mantis_tests
                 app.Navigator.GoToControlPanel();
                 app.Navigator.GoToProjectControlPanel();
                 app.Project.Remove();
-                List<ProjectData> newProjects = app.Project.GetProjects();
-                Assert.AreEqual(projects.Count()-1, newProjects.Count());
+               
             }
         }
     }

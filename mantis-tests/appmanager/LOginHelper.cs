@@ -25,8 +25,8 @@ namespace mantis_tests
                     }
                     Logout();
                 }
-                Type(By.Name("username"), account.Name);
-                Type(By.Name("password"), account.Password);
+                Type(By.Name("administrator"), account.Name);
+                Type(By.Name("root"), account.Password);
                 driver.FindElement(By.XPath("//input[@value='Войти']")).Click();
             }
 

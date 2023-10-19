@@ -32,9 +32,9 @@ namespace mantis_tests
         {
             driver= new FirefoxDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
-            baseURL = "http://localhost";
-            Registration =  new RegistrationHelper(this);
-            Ftp = new FtpHelper(this);
+            baseURL = "http://localhost/mantisbt-2.25.8/login_page.php";
+            //Registration =  new RegistrationHelper(this);
+            //Ftp = new FtpHelper(this);
             //Mail = new MailHelper(this);
             loginHelper = new LoginHelper(this);
             projectHelper = new ProjectHelper(this);
@@ -72,8 +72,8 @@ namespace mantis_tests
             }
         }
 
-        public RegistrationHelper Registration { get; set; }
-        public FtpHelper Ftp { get; set; }
+        //public RegistrationHelper Registration { get; set; }
+        //public FtpHelper Ftp { get; set; }
         //public MailHelper Mail { get; set; }
         public ProjectHelper Project
         {
