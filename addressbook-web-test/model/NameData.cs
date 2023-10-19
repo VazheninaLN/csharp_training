@@ -263,7 +263,7 @@ namespace addressbook_web_test.model
                     if (MiddleName != null && MiddleName != "") { allNameInfo += " " + MiddleName; }
                     if (LastName != null && LastName != "") { allNameInfo +=  " " +LastName; }
                     if (NickName != null && NickName != "") { allNameInfo += "\r\n" + NickName; }
-
+                    if (allNameInfo!= null && allNameInfo != "") { allNameInfo += "\r\n"; }
                     return allNameInfo;
                 }
             }
@@ -376,16 +376,16 @@ namespace addressbook_web_test.model
                 if (allDetals == null)
                 {
                     if (AllNameInfo!= null && AllNameInfo != "") { allDetals += AllNameInfo;}
-                    if (AllInfo!= null && AllInfo != "") { allDetals += "\r\n" + AllInfo; }
+                    if (AllInfo!= null && AllInfo != "") { allDetals += AllInfo; }  if (AllInfo == "") { allDetals += "\r\n"; }
                     if (AllPhoneInfo!= null && AllPhoneInfo != "") { allDetals += "\r\n" + AllPhoneInfo; }
                     if (AllEmailInfo!= null && AllEmailInfo != "") { allDetals += "\r\n" + AllEmailInfo; }
                     if (AllSecInfo!= null && AllSecInfo != "") { allDetals += "\r\n\r\n" + AllSecInfo; }
 
-                    //return Regex.Replace(allDetals, "\r\n", "");
+                    
                     return allDetals;
                 }
 
-                //return Regex.Replace(allDetals, "\r\n", "");
+              
                 return allDetals;
 
             }
