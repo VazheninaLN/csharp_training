@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace mantis_tests
 {
@@ -16,13 +18,18 @@ namespace mantis_tests
 
                 this.baseURL = baseURL;
             }
-            public void GoToControlPanel()
+        
+        public void GoToControlPanel()
             {
-                driver.FindElement(By.XPath("//a[@class='manage-menu-link']")).Click();
-            }
+            driver.Navigate().GoToUrl("http://localhost/mantisbt-2.25.8/my_view_page.php");
+            driver.FindElement(By.XPath("//div[@id='sidebar']/ul/li[7]/a/i")).Click();
+        }
             public void GoToProjectControlPanel()
+
             {
-                driver.FindElement(By.XPath("//a[@href='/mantisbt-1.3.20/manage_proj_page.php']")).Click();
+            driver.Navigate().GoToUrl("http://localhost/mantisbt-2.25.8/manage_overview_page.php");
+            driver.FindElement(By.LinkText("Управление проектами")).Click();
+                //driver.FindElement(By.XPath("//a[@href='/mantisbt-2.25.8/manage_proj_page.php']")).Click();
             }
         }
 

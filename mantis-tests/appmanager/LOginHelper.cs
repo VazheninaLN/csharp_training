@@ -17,41 +17,14 @@ namespace mantis_tests
 
             public void Login(AccountData account)
             {
-                if (IsLoggedIn())
-                {
-                    if (IsLoggedIn(account))
-                    {
-                        return;
-                    }
-                    Logout();
-                }
-                Type(By.Name("administrator"), account.Name);
-                Type(By.Name("root"), account.Password);
-                driver.FindElement(By.XPath("//input[@value='Войти']")).Click();
+                
+               Type(By.Name("username"), account.Name);
+               driver.FindElement(By.XPath("//input[@value='Вход']")).Click();
+               Type(By.Name("password"), account.Password);
+               driver.FindElement(By.XPath("//input[@value='Вход']")).Click();
             }
 
-            public bool IsLoggedIn()
-            {
-                return IsElementPresent(By.XPath("//a[@id='logout-link']"));
-            }
-            public bool IsLoggedIn(AccountData account)
-            {
-                return IsLoggedIn() &&
-                    GetLoggetUsername() == account.Name;
-            }
-            public string GetLoggetUsername()
-            {
-                string text = driver.FindElement(By.XPath("//span[@id='logged-in-user']")).Text;
-                return text;
-            }
-            public void Logout()
-            {
-                if (IsLoggedIn())
-                {
-                    driver.FindElement(By.XPath("//a[@id='logout-link']")).Click();
-                }
-
-            }
+           
 
         }
 

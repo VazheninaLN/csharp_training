@@ -11,10 +11,7 @@ namespace mantis_tests
     public class TestBase
     {
         
-        public static bool PERFORM_LONG_UI_CHECKS = true;
-        public static bool PERFORM_LONG_UI_CHECKS_CONTACT = true;
         protected ApplicationManager app;
-
 
         [SetUp]
         protected void SetupApplicationManager()
@@ -22,9 +19,9 @@ namespace mantis_tests
             //инициализация  ApplicationManager.первый уровень
 
             app = ApplicationManager.GetInstance();
-           
 
         }
+       
         public static Random rnd = new Random();
         public static string GenerateRandomString(int max)
         {

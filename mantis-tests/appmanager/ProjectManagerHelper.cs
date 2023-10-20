@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace mantis_tests
 {
-    public class ProjectHelper : HelperBase
+    public class ProjectManagerHelper : HelperBase
     {
-        public ProjectHelper(ApplicationManager manager) : base(manager)
+        public ProjectManagerHelper(ApplicationManager manager) : base(manager)
         {
         }
         public void Create(ProjectData project)
@@ -21,12 +21,14 @@ namespace mantis_tests
         }
 
 
-        public ProjectHelper InitProjectCreation()
+        public ProjectManagerHelper InitProjectCreation()
         {
-            driver.FindElement(By.XPath("//input[@value='создать новый проект']")).Click();
+            
+            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+            
             return this;
         }
-        public ProjectHelper SubmitProjectCreation()
+        public ProjectManagerHelper SubmitProjectCreation()
         {
             driver.FindElement(By.XPath("//input[@value='Добавить проект']")).Click();
             return this;
