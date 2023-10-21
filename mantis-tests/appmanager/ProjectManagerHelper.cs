@@ -33,20 +33,20 @@ namespace mantis_tests
             driver.FindElement(By.XPath("//input[@value='Добавить проект']")).Click();
             return this;
         }
-        public List<ProjectData> GetProjects()
-        {
-            List<ProjectData> projects = new List<ProjectData>();
-            manager.Navigator.GoToControlPanel();
-            manager.Navigator.GoToProjectControlPanel();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tbody//tr//a"));
-            foreach (IWebElement element in elements)
-            {
-                projects.Add(new ProjectData(element.Text));
-            }
+        //public List<ProjectData> GetProjects()
+        //{
+            //List<ProjectData> projects = new List<ProjectData>();
+            //manager.Navigator.GoToControlPanel();
+            //.Navigator.GoToProjectControlPanel();
+           // ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tbody//tr//a"));
+            //foreach (IWebElement element in elements)
+            //{
+            //    projects.Add(new ProjectData(element.Text));
+           // }
 
-            return projects;
+            //return projects;
 
-        }
+       // }
 
         public void Remove()
         {
