@@ -15,12 +15,25 @@ namespace mantis_tests
             [Test]
             public void ProjectRemovingTest()
             {
-               
+
+                List<ProjectData> projects = new List<ProjectData>();
+                projects = app.api.GetProjects();
+
+
+                if (projects.Count == 0)
+                {
+                   
+                    app.api.CreateProject();
+                    projects = app.api.GetProjects();
+                }
 
                 app.Navigator.GoToControlPanel();
                 app.Navigator.GoToProjectControlPanel();
                 app.Project.Remove();
-               
+
+                List<ProjectData> newProjects = app.api.GetProjects();
+                Assert.AreEqual(projects.Count()-1, newProjects.Count());
+
             }
         }
     }

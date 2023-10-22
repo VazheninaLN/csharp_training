@@ -259,11 +259,11 @@ namespace addressbook_web_test.model
                 else
                 {
 
-                    if (FirstName != null && FirstName != "") { allNameInfo += FirstName; }
+                    if (FirstName != null && FirstName != "")   { allNameInfo += FirstName; }
                     if (MiddleName != null && MiddleName != "") { allNameInfo += " " + MiddleName; }
-                    if (LastName != null && LastName != "") { allNameInfo +=  " " +LastName; }
-                    if (NickName != null && NickName != "") { allNameInfo += "\r\n" + NickName; }
-                    if (allNameInfo!= null && allNameInfo != "") { allNameInfo += "\r\n"; }
+                    if (LastName != null && LastName != "")     { allNameInfo +=  " " +LastName; }
+                    if (NickName != null && NickName != "")     { allNameInfo += "\r\n" + NickName; }
+                   
                     return allNameInfo;
                 }
             }
@@ -272,7 +272,8 @@ namespace addressbook_web_test.model
                 allNameInfo =value;
             }
         }
-
+        
+       
         public string AllPhoneInfo
         {
             get
@@ -284,12 +285,12 @@ namespace addressbook_web_test.model
                 else
                 {
 
-                    if (Thome != null && Thome != "") { allPhoneInfo +="H: " + Thome +"\r\n"; }
-                    if (Tmobile != null && Tmobile != "") { allPhoneInfo += "M: " + Tmobile +"\r\n"; }
-                    if (Twork != null && Twork != "") { allPhoneInfo +=  "W: " + Twork + "\r\n"; }
-                    if (Tfax != null && Tfax != "") { allPhoneInfo +=  "F: " + Tfax + "\r\n"; }
+                    if (Thome != null && Thome != "")     { allPhoneInfo +="H: " + Thome; }
+                    if (Tmobile != null && Tmobile != "") { allPhoneInfo += "\r\n" +"M: " + Tmobile; }
+                    if (Twork != null && Twork != "")     { allPhoneInfo +=  "\r\n"+"W: " + Twork ; }
+                    if (Tfax != null && Tfax != "")       { allPhoneInfo +=  "\r\n" +"F: " + Tfax ; }
 
-                    return allPhoneInfo;
+                    return (allPhoneInfo).TrimEnd();
                 }
             }
             set
@@ -309,10 +310,10 @@ namespace addressbook_web_test.model
                 else
                 {
 
-                    if (Email1 != null && Email1 != "") { allEmailInfo +=Email1 +"\r\n"; }
-                    if (Email2 != null && Email2 != "") { allEmailInfo += Email2 +  "\r\n"; }
-                    if (Email3 != null && Email3 != "") { allEmailInfo += Email3 + "\r\n"; }
-                    if (HomePage != null && HomePage != "") { allEmailInfo +=  "Homepage:\r\n" + HomePage +"\r\n"; }
+                    if (Email1 != null && Email1 != "")   { allEmailInfo += Email1 ; }
+                    if (Email2 != null && Email2 != "")   { allEmailInfo += "\r\n" + Email2 ; }
+                    if (Email3 != null && Email3 != "")   { allEmailInfo += "\r\n" + Email3; }
+                    if (HomePage != null && HomePage != "") { allEmailInfo += "\r\n" + "Homepage:\r\n" + HomePage; }
                     return allEmailInfo;
                 }
             }
@@ -332,9 +333,9 @@ namespace addressbook_web_test.model
                 }
                 else
                 {
-                    if (Title != null && Title != "") { allInfo += Title +  "\r\n"; }
-                    if (Company != null && Company != "") { allInfo +=  Company +"\r\n"; }
-                    if (Address != null && Address != "") { allInfo +=  Address +"\r\n"; }
+                    if (Title != null && Title != "")     { allInfo += "\r\n"  + Title; }
+                    if (Company != null && Company != "") { allInfo +=  "\r\n" + Company; }
+                    if (Address != null && Address != "") { allInfo +=  "\r\n" + Address; }
 
                     return allInfo;
                 }
@@ -356,8 +357,8 @@ namespace addressbook_web_test.model
                 else
                 {
                     if (SecAddress != null && SecAddress != "") { allSecInfo +=SecAddress; }
-                    if (SecHome  != null && SecHome  != "") { allSecInfo += "\r\n\r\n" + "P: " + SecHome; }
-                    if (SecNotes != null && SecNotes != "") { allSecInfo += "\r\n\r\n" + SecNotes; }
+                    if (SecHome  != null && SecHome  != "")     { allSecInfo += "\r\n\r\n" + "P: " + SecHome; }
+                    if (SecNotes != null && SecNotes != "")     { allSecInfo += "\r\n\r\n" + SecNotes; }
                     return allSecInfo;
                 }
 
@@ -375,11 +376,15 @@ namespace addressbook_web_test.model
             {
                 if (allDetals == null)
                 {
-                    if (AllNameInfo!= null && AllNameInfo != "") { allDetals += AllNameInfo;}
-                    if (AllInfo!= null && AllInfo != "") { allDetals += AllInfo; }  if (AllInfo == "") { allDetals += "\r\n"; }
-                    if (AllPhoneInfo!= null && AllPhoneInfo != "") { allDetals += "\r\n" + AllPhoneInfo; }
-                    if (AllEmailInfo!= null && AllEmailInfo != "") { allDetals += "\r\n" + AllEmailInfo; }
-                    if (AllSecInfo!= null && AllSecInfo != "") { allDetals += "\r\n\r\n" + AllSecInfo; }
+                    if (AllNameInfo!= null && AllNameInfo != "")  { allDetals += AllNameInfo;}
+
+                    if (AllInfo!= null && AllInfo != "")          { allDetals += AllInfo; } 
+
+                    if (AllPhoneInfo!= null && AllPhoneInfo != "") { allDetals += "\r\n\r\n" + AllPhoneInfo; }
+
+                    if (AllEmailInfo!= null && AllEmailInfo != "") { allDetals += "\r\n\r\n" + AllEmailInfo; }
+
+                    if (AllSecInfo!= null && AllSecInfo != "")     { allDetals += "\r\n\r\n" + AllSecInfo; }
 
                     
                     return allDetals;
