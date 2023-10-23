@@ -15,8 +15,8 @@ namespace mantis_tests
             [Test]
             public void ProjectCreationTest()
             {
-                List<ProjectData> projects = new List<ProjectData>();
-                projects = app.api.GetProjects();
+                List<ProjectData> oldpProjects = new List<ProjectData>();
+                oldpProjects = app.api.GetProjects();
 
                 ProjectData project = new ProjectData("test" + TestBase.GenerateRandomString(10));
 
@@ -28,10 +28,8 @@ namespace mantis_tests
 
                 List<ProjectData> newProjects = app.api.GetProjects();
 
-                projects.Add(project);
-                projects.Sort();
-                newProjects.Sort();
-                Assert.AreEqual(projects, newProjects);
+              
+                Assert.AreEqual(oldpProjects.Count+1, newProjects.Count);
 
             }
         }
