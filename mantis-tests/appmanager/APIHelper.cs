@@ -20,16 +20,17 @@ namespace mantis_tests
 
             Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
             Mantis.ProjectData project = new Mantis.ProjectData();
-            Mantis.ProjectData[] projectsMantis = client.mc_projects_get_user_accessible("administrator", "root");
-            
+           // client.mc_projects_get_user_accessibleAsync("administrator", "root");
+            Mantis.ProjectData[] projectsMantis = client.mc_projects_get_user_accessibleAsync("administrator", "root");
+
             foreach (Mantis.ProjectData proj in projectsMantis)
             {
                 projects.Add(new ProjectData(proj.name)
                 {
                     Id = proj.id,
-                    Description = proj.description
-                });
-            }
+                  
+               });
+           }
             return projects;
         }
         public void CreateProject()
@@ -42,7 +43,7 @@ namespace mantis_tests
 
             Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
 
-            client.mc_project_add("administrator", "root", projectMantis);
+            client.mc_project_addAsync("administrator", "root", projectMantis);
         }
     }
 }
