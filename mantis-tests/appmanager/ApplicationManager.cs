@@ -87,7 +87,7 @@ namespace mantis_tests
         }
         public APIHelper api
         {
-            get { return api;}
+            get { return apiHelper;}
         }
 
 

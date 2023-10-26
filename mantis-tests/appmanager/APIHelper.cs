@@ -21,7 +21,7 @@ namespace mantis_tests
             Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
             Mantis.ProjectData project = new Mantis.ProjectData();
            // client.mc_projects_get_user_accessibleAsync("administrator", "root");
-            Mantis.ProjectData[] projectsMantis = client.mc_projects_get_user_accessibleAsync("administrator", "root");
+            Mantis.ProjectData[] projectsMantis = client.mc_projects_get_user_accessibleAsync("administrator", "root").Result;
 
             foreach (Mantis.ProjectData proj in projectsMantis)
             {
